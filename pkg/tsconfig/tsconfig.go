@@ -31,7 +31,7 @@ type (
 	// PathReplacement defines a single Typescript path with its replacement
 	PathReplacement struct {
 		Pattern     []byte
-		Replacement [][]byte
+		Replacement []byte
 	}
 )
 
