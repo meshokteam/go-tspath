@@ -67,6 +67,18 @@ func Execute() {
 	}
 
 	for _, file := range files {
+		fi, err := os.Stat(file)
+
+		if err == nil {
+			log.Debug().Str("file", file).Err(err).Msg("file skipped because of error")
+			continue
+		}
+
+		if fi.IsDir() {
+			log.Debug().Str("file", file).Err(err).Msg("file skipped because of it's a directory")
+			continue
+		}
+
 		log.Debug().Str("file", file).Msg("processing file")
 		replacer.Replace(file, replacements)
 	}
