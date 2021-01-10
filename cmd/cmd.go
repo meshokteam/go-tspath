@@ -66,10 +66,12 @@ func Execute() {
 		})
 	}
 
+	filesCount := 0
+
 	for _, file := range files {
 		fi, err := os.Stat(file)
 
-		if err == nil {
+		if err != nil {
 			log.Debug().Str("file", file).Err(err).Msg("file skipped because of error")
 			continue
 		}
@@ -81,7 +83,8 @@ func Execute() {
 
 		log.Debug().Str("file", file).Msg("processing file")
 		replacer.Replace(file, replacements)
+		filesCount++
 	}
 
-	log.Info().Msgf("processed %d files in %v", len(files), time.Since(startTime))
+	log.Info().Msgf("processed %d files in %v", filesCount, time.Since(startTime))
 }
