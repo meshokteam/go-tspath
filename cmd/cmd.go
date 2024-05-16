@@ -37,7 +37,7 @@ func Execute() {
 
 	config := tsconfig.New(*configPath).Read()
 
-	outFilesPath := filepath.Join(*targetDir, "**/*.js")
+	outFilesPath := filepath.Join(*targetDir, "**/*.{js,mjs}")
 	files, err := zglob.Glob(outFilesPath)
 
 	if err != nil {
